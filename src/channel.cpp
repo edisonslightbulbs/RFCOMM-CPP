@@ -1,12 +1,13 @@
 #include "channel.h"
 #include "macros.hpp"
 
-int channel::queryID(uint8_t *uuid, char *deviceAddress) {
+int channel::queryID(uint8_t* uuid, char* deviceAddress)
+{
     // connect to an SDP server
     uint8_t address[6];
     str2ba(deviceAddress, (ADDRESS*)&address);
 
-    ADDRESS tmp = {0, 0, 0, 0, 0, 0};
+    ADDRESS tmp = { 0, 0, 0, 0, 0, 0 };
 
     SESSION* session = sdp_connect(&tmp, (ADDRESS*)&address, SDP_RETRY_IF_BUSY);
     if (!session) {
@@ -20,8 +21,8 @@ int channel::queryID(uint8_t *uuid, char *deviceAddress) {
     // create query lists
     int range = 0x0000ffff;
     LIST* responseList;
-    LIST* searchList = sdp_list_append(NULL, &uuid128);
-    LIST* attrIdList = sdp_list_append(NULL, &range);
+    LIST* searchList = sdp_list_append(nullptr, &uuid128);
+    LIST* attrIdList = sdp_list_append(nullptr, &range);
 
     // search for records
     int success = sdp_service_search_attr_req(
@@ -42,7 +43,7 @@ int channel::queryID(uint8_t *uuid, char *deviceAddress) {
     int channel = 0;
     LIST* responses = responseList;
     while (responses) {
-        RECORD* record = (RECORD*)responses->data;
+        auto* record = (RECORD*)responses->data;
 
         LIST* protoList;
         success = sdp_get_access_protos(record, &protoList);
@@ -81,11 +82,11 @@ int channel::queryID(uint8_t *uuid, char *deviceAddress) {
                 }
                 pds = pds->next; // to next pds
             }
-            sdp_list_free((LIST*)protocol->data, 0);
+            sdp_list_free((LIST*)protocol->data, nullptr);
 
             protocol = protocol->next; // to next protocol
         }
-        sdp_list_free(protoList, 0);
+        sdp_list_free(protoList, nullptr);
 
         responses = responses->next; // to next response
     }
