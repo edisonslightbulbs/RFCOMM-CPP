@@ -1,0 +1,21 @@
+# build files
+build/
+
+# logs files
+*.log
+
+# miscellaneous
+*.csv
+# *.png
+*.ply
+
+# CLion
+.idea/
+cmake-build-debug/
+
+# libtorch
+*.zip
+external/libtorch/
+scripts/bluetooth
+CMakeLists.txt
+main.*
