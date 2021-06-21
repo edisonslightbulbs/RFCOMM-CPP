@@ -1,8 +1,10 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+namespace client {
+
 /**
- * clientCall
+ * callServer
  *   Calls a remote server over a RFCOMM (TX) channel.
  *
  *   @ref
@@ -11,6 +13,6 @@
  *   accessed
  *     05:22 18 June 2021
  */
-void clientCall(int channel, char deviceAddress[18]);
-
+void callServer(int channel, char *deviceAddress);
+}
 #endif

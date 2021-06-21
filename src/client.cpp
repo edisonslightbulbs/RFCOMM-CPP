@@ -1,10 +1,7 @@
-#include <unistd.h>
-
 #include "client.h"
 #include "macros.hpp"
 
-void clientCall(int channel, char deviceAddress[18])
-{
+void client::callServer(int channel, char *deviceAddress) {
     // allocate a socket
     struct sockaddr_rc address = { 0 };
     int allocatedSocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
@@ -15,7 +12,8 @@ void clientCall(int channel, char deviceAddress[18])
     str2ba(deviceAddress, &address.rc_bdaddr);
 
     // connect to remote device
-    int callStatus, writeStatus;
+    int callStatus;
+    long writeStatus;
     callStatus
         = connect(allocatedSocket, (struct sockaddr*)&address, sizeof(address));
 

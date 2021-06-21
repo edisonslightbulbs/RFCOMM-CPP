@@ -1,10 +1,9 @@
-#include <stdlib.h>
 #include <unistd.h>
 
 #include "macros.hpp"
 #include "server.h"
 
-void setupSever(int channelID, int connectionCount)
+void server::setup(int channelID, int connectionCount)
 {
     struct sockaddr_rc localAddress = { 0 }, remoteAddress = { 0 };
     socklen_t opt = sizeof(remoteAddress);
@@ -19,7 +18,7 @@ void setupSever(int channelID, int connectionCount)
     }
 
     localAddress.rc_family = AF_BLUETOOTH;
-    localAddress.rc_bdaddr = *BDADDR_ANY;
+    localAddress.rc_bdaddr = {0, 0, 0, 0, 0, 0};
     localAddress.rc_channel = channelID;
 
     // bind communication socket

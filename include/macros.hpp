@@ -3,13 +3,16 @@
 #ifndef MACROS_HPP
 #define MACROS_HPP
 
+extern "C" {
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
 #include <bluetooth/sdp.h>
 #include <bluetooth/sdp_lib.h>
 #include <sys/socket.h>
-#include <stdbool.h>
-#include <time.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <ctime>
+}
 
 #define UUID uuid_t
 #define ADDRESS bdaddr_t

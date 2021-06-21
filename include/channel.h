@@ -3,6 +3,8 @@
 
 #include <stdint-gcc.h>
 
+namespace channel {
+
 /**
  * channel.h
  *   Establishes RFCOMM (TX) channel associated with
@@ -14,6 +16,6 @@
  *   accessed
  *     18 June 2021
  */
-int getChannel(uint8_t* uuid, char deviceAddress[18]);
-
+int queryID(uint8_t* uuid, char *deviceAddress);
+}
 #endif // CHANNEL_H

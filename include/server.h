@@ -1,9 +1,11 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+namespace server {
+
 /**
- * setupServer
- *   Creates a local server and opens an RFCOMM (RX) channel
+ * setup
+ *   Uses host machine as a local server: opens an RFCOMM (RX) channel
  *   for a specified number of connections.
  *
  *   @ref
@@ -12,6 +14,6 @@
  *   accessed
  *     05:22 18 June 2021
  */
-void setupSever(int channelID, int connectionCount);
-
+void setup(int channelID, int connectionCount);
+}
 #endif // SERVER_H

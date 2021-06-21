@@ -1,15 +1,14 @@
-#include <stdlib.h>
-
 #include "channel.h"
 #include "macros.hpp"
 
-int getChannel(uint8_t* uuid, char deviceAddress[18])
-{
+int channel::queryID(uint8_t *uuid, char *deviceAddress) {
     // connect to an SDP server
     uint8_t address[6];
     str2ba(deviceAddress, (ADDRESS*)&address);
-    SESSION* session
-        = sdp_connect(BDADDR_ANY, (ADDRESS*)&address, SDP_RETRY_IF_BUSY);
+
+    ADDRESS tmp = {0, 0, 0, 0, 0, 0};
+
+    SESSION* session = sdp_connect(&tmp, (ADDRESS*)&address, SDP_RETRY_IF_BUSY);
     if (!session) {
         fprintf(stderr, "-- can't connect to sdp server! \n");
         exit(-1);
@@ -61,7 +60,7 @@ int getChannel(uint8_t* uuid, char deviceAddress[18])
             while (pds) { // loop thru all pds
                 DATA* d;
                 int dtd;
-                d = pds->data;
+                d = (sdp_data_t*)pds->data;
                 while (d) {
                     dtd = d->dtd;
                     switch (dtd) {
