@@ -1,5 +1,5 @@
 #include "client.h"
-#include "macros.hpp"
+#include "definitions.hpp"
 
 void client::callServer(int channel, char *deviceAddress) {
     // allocate a socket
