@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-#include "macros.hpp"
+#include "definitions.hpp"
 #include "server.h"
 
 void server::setup(int channelID, int connectionCount)
@@ -18,7 +18,7 @@ void server::setup(int channelID, int connectionCount)
     }
 
     localAddress.rc_family = AF_BLUETOOTH;
-    localAddress.rc_bdaddr = {0, 0, 0, 0, 0, 0};
+    localAddress.rc_bdaddr = { 0, 0, 0, 0, 0, 0 };
     localAddress.rc_channel = channelID;
 
     // bind communication socket
@@ -53,12 +53,12 @@ void server::setup(int channelID, int connectionCount)
     memset(buf, 0, sizeof(buf));
 
     // read data from the client
-    BEGIN_DELAY_ENVIRONMENT
+    // BEGIN_DELAY_ENVIRONMENT
     long bytesRead = read(client, buf, sizeof(buf));
     if (bytesRead > 0) {
         printf("received [%s]\n", buf);
     }
-    END_DELAY_ENVIRONMENT
+    // END_DELAY_ENVIRONMENT
 
     // close connection
     close(client);
