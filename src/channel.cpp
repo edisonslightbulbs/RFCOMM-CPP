@@ -1,5 +1,5 @@
 #include "channel.h"
-#include "macros.hpp"
+#include "definitions.hpp"
 
 int channel::queryID(uint8_t* uuid, char* deviceAddress)
 {
